@@ -33,12 +33,18 @@ class SleepOperation: Operation {
         self.__isFinished = true
     }
     
-    private var __executing = false
+    private var __executing = false {
+        willSet { willChangeValue(forKey: "isExecuting") }
+        didSet { didChangeValue(forKey: "isExecuting") }
+    }
     override var isExecuting: Bool {
         return __executing
     }
     
-    private var __isFinished = false
+    private var __isFinished = false {
+        willSet { willChangeValue(forKey: "isFinished") }
+        didSet { didChangeValue(forKey: "isFinished") }
+    }
     override var isFinished: Bool {
         return __isFinished
     }
