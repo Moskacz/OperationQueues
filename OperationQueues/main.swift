@@ -15,18 +15,16 @@ enum Test {
 }
 
 var test = Test.dependantOperations
+let queue = OperationQueue()
 switch test {
 case .concurrentQueue:
-    let queue = OperationQueue()
     queue.addOperation(SleepOperation(seconds: 2, name: "1"))
     queue.addOperation(SleepOperation(seconds: 4, name: "2"))
 case .serialQueue:
-    let queue = OperationQueue()
     queue.maxConcurrentOperationCount = 1
     queue.addOperation(SleepOperation(seconds: 2, name: "1"))
     queue.addOperation(SleepOperation(seconds: 4, name: "2"))
 case .dependantOperations:
-    let queue = OperationQueue()
     let op1 = SleepOperation(seconds: 2, name: "1")
     let op2 = SleepOperation(seconds: 3, name: "2")
     let op3 = SleepOperation(seconds: 1, name: "3")
@@ -35,4 +33,4 @@ case .dependantOperations:
     [op1, op2, op3].forEach { queue.addOperation($0) }
 }
 
-RunLoop.main.run()
+queue.waitUntilAllOperationsAreFinished()
