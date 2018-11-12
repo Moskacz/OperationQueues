@@ -26,20 +26,20 @@ class SleepOperation: Operation {
     }
     
     override func start() {
-        self.myExecuting = true
+        self.__executing = true
         print("start \(name!)")
         sleep(seconds)
-        self.myExecuting = false
-        self.myIsFinished = true
+        self.__executing = false
+        self.__isFinished = true
     }
     
-    private var myExecuting = false
+    private var __executing = false
     override var isExecuting: Bool {
-        return myExecuting
+        return __executing
     }
     
-    private var myIsFinished = false
+    private var __isFinished = false
     override var isFinished: Bool {
-        return myIsFinished
+        return __isFinished
     }
 }
